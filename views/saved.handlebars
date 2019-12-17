@@ -4,46 +4,49 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons black-text">Menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li class="scrapeRefresh" >
-                    <a id="update" href="#" class="modal-trigger" style='font-weight: bold' data-target="modal-scrapeRefresh">Update News</a>
+                    <a href="/" class="modal-trigger" style='font-weight: bold' data-target="modal-NewsFeed">Return to News Feed</a>
                 </li>
-                <li class="scrapeRefresh" >
-                    <a id="savedArticles" href="/savedArticles" class="modal-trigger" style='font-weight: bold' data-target="modal-savedArticles">Saved Articles</a>
-                </li>
+                
             </ul>
     </div>
 </nav>
 
     <ul class="sidenav" id="mobile-demo">
         <li class="scrapeRefresh" >
-            <a id="update" href="#" class="black-text modal-trigger" data-target="modal-scrapeRefresh">Update News</a>
+            <a href="/" class="black-text modal-trigger" data-target="modal-NewsFeed">Return to News Feed</a>
         </li>
-        <li class="scrapeRefresh" >
-            <a id="savedArticles" href="/savedArticles" class="black-text modal-trigger" data-target="modal-savedArticles">Saved Articles</a>
-        </li>
+        
     </ul>
 
 <div id="container" class="container col s12 m8 l8">
     <div class="col s12 m8 l8">
         <ul class="collection with-header">
             {{#each stories}}
-                <li class="collection-header" data-id={{id}} class='item-Title'>{{title}} </li>
+                <li class="collection-header" data-id={{id}} class='item-Title'>{{title}}  <button class="btn-small red"  data-id={{id}} data-target="modal-savedArticles" class="modal-trigger" id="delete-btn">Delete</button></li>
                 <li class="collection-item" data-id={{id}} class ='item-Link' herf={{link}}><a>{{link}}</a> </li>
                 <li class="collection-item" data-id={{id}} class ='item-Summary'>Summary:  {{summary}} </li>
                
                 <li class="collection-item" class ='item-Summary'>
-                    <form class='create-form' method="post">
-                        <button class="btn-small red"  data-id={{id}} data-target="modal-savedArticles" class="modal-trigger" id="saved-btn">Save</button> <button class="btn-small red"  data-id={{id}} data-target="modal-savedArticles" class="modal-trigger" id="delete-btn">Delete</button>
+                    <form class='create-form'>
+                         <button class="btn-small red"  data-id={{id}} data-target="modal-oneArticle" class="btn modal-trigger" id="note-btn">Comments</button>
                     </form>
+
                 </li>
             {{/each}}
         
         </ul>
     </div>
-
-
 </div>
 
-
+<!-- Modal Structure -->
+<div id="modal-oneArticle" class="modal">
+    <div class="modal-content">
+        <h1>Your Comment</h1>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Close</a>
+    </div>
+</div>
 
                 {{!-- <li class="collection-item" class ='item-Summary'>
                     <form class="create-form" method="post">
