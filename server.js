@@ -1,7 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
+var exphbs = require("express-handlebars");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -25,6 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
+
+//Set handlebars as the default templating engine:
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
 
 // Connect to the Mongo DB
 var MONGODB_URL = process.env.MONGODB_URL || "mongodb://localhost/News4U";
@@ -56,17 +61,13 @@ app.get("/scrape", function(req, res) {
           summary: summary,
           saved: saved,
           note: note
-        },
-        function(err, dbArticle) {
-          if (err) {
-            // Log the error if one is encountered during the query
-            console.log(err);
-          }
-          else {
-            // Otherwise, log the inserted data
-            console.log("Scraped data inserted");
-          }
-        });
+        }).then(
+        function(dbArticle) {
+          console.log(dbArticle);
+        })
+        .catch(function(err){
+          console.log(err);
+        })
       }
     });
   });
@@ -74,6 +75,19 @@ app.get("/scrape", function(req, res) {
   console.log('Referesh Worked');
 });
 
+// Route for getting all Articles from the db with Handlebars
+app.get("/articlesTEST", function(req, res) {
+  // Grab every document in the Articles collection
+  db.Article.find({})
+    .then(function(dbArticle) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.render("index", {stories: dbArticle});
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
 
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
