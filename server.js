@@ -78,7 +78,7 @@ app.get("/scrape", function(req, res) {
 // Route for getting all Articles from the db with Handlebars
 app.get("/", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({}).sort({_id: -1})
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.render("index", {stories: dbArticle});
@@ -142,7 +142,7 @@ app.post("/articles/:id", async function(req, res) {
 
 
 app.get("/savedArticles", function(req, res){
-  db.Article.find({saved: true})
+  db.Article.find({saved: true}).sort({_id: -1})
     .then(function(dbArticle) {
       res.render("saved", {stories: dbArticle});
     })

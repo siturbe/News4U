@@ -56,8 +56,16 @@ $(document).on("click", "#saved-btn", function(e){
 
 //New Code to scrape on command
 $(document).on("click", "#update", function(){
-  $.get("/scrape", function(){
-    alert("Scraped New Data");
+  alert("This may take a few seconds");
+  // $.get("/scrape", function(){
+  //   console.log("scarped new articles")
+  // })
+
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  })
+  .then(function(){
     window.location.reload();
   })
 
