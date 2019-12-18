@@ -22,7 +22,7 @@
     <div class="col s12 m8 l8">
         <ul class="collection with-header">
             {{#each stories}}
-                <li class="collection-header" data-id={{id}} class='item-Title'>{{title}} </li>
+                <li class="collection-header" data-id={{id}}>{{title}} </li>
                 <li class="collection-item" data-id={{id}} class ='item-Summary'>Summary:  {{summary}} </li>
                
                 <li class="collection-item" class ='item-Summary'>
@@ -35,9 +35,13 @@
                 </li>
                 <li class="collection-item" data-id={{id}} class='item-existing-comments'>
                     <ul class="collection with-header">
-                        {{#each notes}}
+                        
+                        {{#each note}}
+                            {{#if body}}    
                             <li class="collection-item" class="item-Comment">{{body}}  --{{author}}</li>
+                            {{/if}}
                         {{/each}}
+                        
                     </ul>
                 </li>
             {{/each}}
