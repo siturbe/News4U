@@ -1,6 +1,6 @@
-$(document).ready(function(){
-  $('.modal').modal()
-});
+// $(document).ready(function(){
+//   $('.modal').modal()
+// });
 
 // Grab the articles as a json
 // $.getJSON("/articles", function(data) {
@@ -47,7 +47,7 @@ $(document).ready(function(){
 // });
 
 // When you click the savenote button
-$(document).on("click", "#savenote", function() {
+$(document).on("click", "#addNote-btn", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
   console.log(thisId);
@@ -55,12 +55,12 @@ $(document).on("click", "#savenote", function() {
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
+    url: "/notes/" + thisId,
     data: {
       // Value taken from title input
-      title: $("#titleinput").val(),
+      author: $("#author-input").val(),
       // Value taken from note textarea
-      body: $("#bodyinput").val()
+      body: $("#comment-input").val()
     }
   })
     // With that done
@@ -68,12 +68,12 @@ $(document).on("click", "#savenote", function() {
       // Log the response
       console.log(data);
       // Empty the notes section
-      $("#notes").empty();
+  
     });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
+  $("#author-input").val("");
+  $("#comment-input").val("");
 });
 
 
@@ -125,23 +125,23 @@ $(document).on("click","#delete-btn", function(e){
 })
 
 
-$(document).on("click", "#savenote", function() {
-  var thisId = $(this).attr("data-id");
+// $(document).on("click", "#savenote", function() {
+//   let thisId = $(this).attr("data-id");
 
-  $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      title: $("#titleinput").val(),
-      body: $("#bodyinput").val()
-    }
-  })
-    .then(function(data) {
-      console.log(data);
-      $("#notes").empty();
-    });
+//   $.ajax({
+//     method: "POST",
+//     url: "/notes/" + thisId,
+//     data: {
+//       title: $("#titleinput").val(),
+//       body: $("#bodyinput").val()
+//     }
+//   })
+//     .then(function(data) {
+//       console.log(data);
+//       ;
+//     });
 
  
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
-});
+//   $("#titleinput").val("");
+//   $("#bodyinput").val("");
+// });

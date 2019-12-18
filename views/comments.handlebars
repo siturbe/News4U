@@ -22,15 +22,23 @@
     <div class="col s12 m8 l8">
         <ul class="collection with-header">
             {{#each stories}}
-                <li class="collection-header" data-id={{id}} class='item-Title'>{{title}}  <button class="btn-small red"  data-id={{id}} data-target="modal-savedArticles" class="modal-trigger" id="delete-btn">Delete</button></li>
-                <li class="collection-item" data-id={{id}} class ='item-Link' href={{link}}><a>{{link}}</a> </li>
+                <li class="collection-header" data-id={{id}} class='item-Title'>{{title}} </li>
                 <li class="collection-item" data-id={{id}} class ='item-Summary'>Summary:  {{summary}} </li>
                
                 <li class="collection-item" class ='item-Summary'>
                     <form class='create-form'>
-                         <a class="btn-small red" href="/comments/{{id}}" data-id={{id}} data-target="modal-oneArticle" class="btn modal-trigger" id="note-btn">Comments</a>
+                        <input type='text' id="comment-input" placeholder="Insert comment">
+                        <input type='text' id="author-input" placeholder="username">
+                         <button class="btn-small red"  data-id={{id}} data-target="modal-oneArticle" class="btn modal-trigger" id="addNote-btn">Add Comment</button>
                     </form>
 
+                </li>
+                <li class="collection-item" data-id={{id}} class='item-existing-comments'>
+                    <ul class="collection with-header">
+                        {{#each notes}}
+                            <li class="collection-item" class="item-Comment">{{body}}  --{{author}}</li>
+                        {{/each}}
+                    </ul>
                 </li>
             {{/each}}
         
