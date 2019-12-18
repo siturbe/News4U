@@ -38,7 +38,7 @@
                         
                         {{#each note}}
                             {{#if body}}    
-                            <li class="collection-item" class="item-Comment">{{body}}  --{{author}}</li>
+                            <li class="collection-item" class="item-Comment">{{body}}  --{{author}} <button class="btn-small red" data-id={{id}} id="delete-comment-btn">Delete Comment</button></li>
                             {{/if}}
                         {{/each}}
                         
