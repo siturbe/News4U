@@ -68,7 +68,7 @@ $(document).on("click", "#addNote-btn", function() {
       // Log the response
       console.log(data);
       // Empty the notes section
-  
+      window.location.reload();
     });
 
   // Also, remove the values entered in the input and textarea for note entry
@@ -112,7 +112,7 @@ $(document).on("click", "#update", function(){
 $(document).on("click","#delete-btn", function(e){
   e.preventDefault();
   let thisId = $(this).attr("data-id");
-  if(confirm("Are you sure you want to delte this article")){
+  if(confirm("Are you sure you want to delete this article")){
 
     $.ajax({
       method: "POST",
