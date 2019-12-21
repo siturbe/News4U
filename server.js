@@ -34,7 +34,7 @@ app.set("view engine", "handlebars");
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/News4U";
 console.log(MONGODB_URI)
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true}, { useUnifiedTopology: true }, err=>console.log("Error: " + err));
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true}, err=>console.log("Error: " + err));
 
 // Routes
 
