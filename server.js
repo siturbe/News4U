@@ -70,6 +70,9 @@ app.get("/scrape", function(req, res) {
         })
       }
     });
+  })
+  .catch(function(err){
+    console.log(err);
   });
   // Send a "Scrape Complete" message to the browser
   console.log('Referesh Worked');
@@ -129,15 +132,15 @@ app.post("/notes/:id", function(req, res) {
 // Route for saving/updating an Article's saved status
 app.post("/articles/:id", async function(req, res) {
   // Create a new note and pass the req.body to the entry
+  try{
   let doc = await db.Article.findOne({_id: req.params.id});
   doc.saved = true;
-  await doc.save()
-  .then(function(dbArticle){
+  const dbArticle = await doc.save()
     res.json(dbArticle);
-  })
-  .catch(function(err){
+  }
+  catch(err){
     res.json(err);
-  });
+  }
 });
 
 
